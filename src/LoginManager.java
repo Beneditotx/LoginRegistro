@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class LoginManager {
 
     private HashMap<String, User> users;
+    BooksManager manager = new BooksManager();
 
     public LoginManager(HashMap<String, User> users) {
         this.users = users;
@@ -41,39 +42,57 @@ public class LoginManager {
 
         if (authenticateLogin(username, password)) {
 
-            User user = users.get(username);
-            System.out.println();
-            System.out.println("Login successful! Welcome " + user.getNomeCompleto());
+            String choiceLogin = "";
+            while (!choiceLogin.equals("4")) {
+                User user = users.get(username);
+                System.out.println();
+                System.out.println("Welcome " + user.getNomeCompleto());
 
-            System.out.println();
-            System.out.println("===================================");
-            System.out.println("            1. Profile");
-            System.out.println("            2. See Books");
-            System.out.println("            3. Logout");
-            System.out.println("===================================");
-            String choiceLogin = sc.nextLine().trim();
+                System.out.println();
+                System.out.println("===================================");
+                System.out.println("            1. Profile");
+                System.out.println("            2. See Books");
+                System.out.println("            3. Return Books");
+                System.out.println("            4. Logout");
+                System.out.println("===================================");
+                System.out.print("=> Choose an option: ");
+                choiceLogin = sc.nextLine().trim();
 
-            switch (choiceLogin) {
+                switch (choiceLogin) {
 
-                case "1":
-                    System.out.println("Profile");
-                    break;
-                case "2":
-                    System.out.println("See Books");
-                    break;
-                case "3":
-                    System.out.println("Logout");
-                default:
-                    System.out.println("Invalid option! Try again.");
+                    case "1":
+                        System.out.println();
+                        System.out.println("----- User Data -----");
+                        System.out.println("Name: " + user.getNomeCompleto());
+                        System.out.println("E-mail: " + user.getEmail());
+                        System.out.println("Date of birth: " + user.getDataNascimento());
+                        System.out.println("Age: " + user.getIdade());
+                        System.out.println("Gender: " + user.getSexo());
+                        break;
+                    case "2":
+                        manager.borrowBooks();
+                        break;
+                    case "3":
+                        System.out.println();
+                        System.out.println("Return Books");
+                        manager.returnBooks();
+                    case "4":
+                        System.out.println();
+                        System.out.println("Logging out!");
+                        break;
+                    default:
+                        System.out.println("Invalid option! Try again.");
+                }
             }
 
-        } else {
+            } else{
 
-            System.out.println();
-            System.out.println("Invalid credentials! Please try again");
+                System.out.println();
+                System.out.println("Invalid credentials! Please try again");
 
+            }
         }
-    }
+
 
     private boolean authenticateLogin(String username, String password) {
 
