@@ -66,8 +66,9 @@ public class LoginManager {
                         System.out.println("Name: " + user.getNomeCompleto());
                         System.out.println("E-mail: " + user.getEmail());
                         System.out.println("Date of birth: " + user.getDataNascimento());
-                        System.out.println("Age: " + user.getIdade());
-                        System.out.println("Gender: " + user.getSexo());
+                        System.out.println("CPF: " + user.getCpf());
+                        System.out.println("Address: " + user.getEndereco());
+                        System.out.println("Phone Number: " + user.getTelefone());
                         break;
                     case "2":
                         manager.borrowBooks();
@@ -103,8 +104,8 @@ public class LoginManager {
 
         User user = users.get(username);
 
-        System.out.println("[DEBUG] Stored password: " + user.getPassword());
-        System.out.println("[DEBUG] Entered password: " + password);
+        //System.out.println("[DEBUG] Stored password: " + user.getPassword());
+        //System.out.println("[DEBUG] Entered password: " + password);
 
         return user.getPassword().equals(password);
     }
@@ -134,7 +135,7 @@ public class LoginManager {
 
             users.put(username, user);
 
-            System.out.println("[DEBUG] New password set successfully: " + user.getPassword());
+            //System.out.println("[DEBUG] New password set successfully: " + user.getPassword());
 
             System.out.println("Password reset successfully! You can now log in.");
         } else {

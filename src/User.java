@@ -6,18 +6,23 @@ public class User {
     private String sobrenome;
     private String email;
     private String dataNascimento;
+    private String telefone;
+    private String endereco;
+    private String cpf;
     private int idade;
-    private String sexo;
 
-    public User(String username, String password, String nome, String sobrenome, String email, String dataNascimento, int idade, String sexo) {
+    public User(String username, String password, String nome, String sobrenome, String email,
+                String dataNascimento, String telefone, String endereco, String cpf, int idade) {
         this.username = username;
         this.password = password;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.email = email;
         this.dataNascimento = dataNascimento;
+        this.telefone = telefone;
+        this.endereco = endereco;
+        this.cpf = cpf;
         this.idade = idade;
-        this.sexo = sexo;
     }
 
     public String getUsername() {
@@ -40,22 +45,31 @@ public class User {
         return dataNascimento;
     }
 
-    public int getIdade() {
-        return idade;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public String getSexo() {
-        return sexo;
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public int getIdade() {
+        return idade;
     }
 
     public void setPassword(String newPassword) {
         this.password = newPassword;
     }
 
-    public String getpassword(){
-        return password;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setEmail(String email) {
+    public void put(String cpf, User user) {
+
     }
 }

@@ -33,7 +33,7 @@ public class Main {
                     loginManager.handleLogin(sc);
                     break;
                 case "2":
-                    registerManager.register(sc);
+                    registerManager.registerUser(sc);
                     break;
                 case "3":
                     System.out.println();
