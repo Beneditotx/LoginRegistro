@@ -1,75 +1,76 @@
-public class User {
+import java.util.HashMap;
+import java.util.Map;
 
+public class User {
     private String username;
     private String password;
-    private String nome;
-    private String sobrenome;
+    private String firstName;
+    private String lastName;
     private String email;
-    private String dataNascimento;
-    private String telefone;
-    private String endereco;
+    private String birthDate;
+    private String phone;
+    private String address;
     private String cpf;
-    private int idade;
+    private int age;
+    private Map<String, String> borrowedBooks;
 
-    public User(String username, String password, String nome, String sobrenome, String email,
-                String dataNascimento, String telefone, String endereco, String cpf, int idade) {
+    public User(String username, String password, String firstName, String lastName,
+                String email, String birthDate, String phone, String address,
+                String cpf, int age) {
         this.username = username;
         this.password = password;
-        this.nome = nome;
-        this.sobrenome = sobrenome;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
-        this.dataNascimento = dataNascimento;
-        this.telefone = telefone;
-        this.endereco = endereco;
+        this.birthDate = birthDate;
+        this.phone = phone;
+        this.address = address;
         this.cpf = cpf;
-        this.idade = idade;
+        this.age = age;
+        this.borrowedBooks = new HashMap<>();
     }
 
-    public String getUsername() {
-        return username;
-    }
+    // Getters
+    public String getUsername() { return username; }
+    public String getPassword() { return password; }
+    public String getFirstName() { return firstName; }
+    public String getLastName() { return lastName; }
+    public String getEmail() { return email; }
+    public String getBirthDate() { return birthDate; }
+    public String getPhone() { return phone; }
+    public String getAddress() { return address; }
+    public String getCpf() { return cpf; }
+    public int getAge() { return age; }
 
-    public String getPassword() {
-        return password;
-    }
-
+    // Método adicionado para resolver o problema
     public String getNomeCompleto() {
-        return nome + " " + sobrenome;
+        return firstName + " " + lastName;
     }
 
-    public String getEmail() {
-        return email;
+    // Setters
+    public void setPassword(String password) { this.password = password; }
+
+    // Book management methods
+    public void borrowBook(String code, String title) {
+        borrowedBooks.put(code, title);
     }
 
-    public String getDataNascimento() {
-        return dataNascimento;
+    public boolean returnBook(String code) {
+        return borrowedBooks.remove(code) != null;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public Map<String, String> getBorrowedBooks() {
+        return borrowedBooks;
     }
 
-    public String getEndereco() {
-        return endereco;
-    }
+    public void listBorrowedBooks() {
+        if (borrowedBooks.isEmpty()) {
+            System.out.println("Você não tem livros emprestados.");
+            return;
+        }
 
-    public String getCpf() {
-        return cpf;
-    }
-
-    public int getIdade() {
-        return idade;
-    }
-
-    public void setPassword(String newPassword) {
-        this.password = newPassword;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void put(String cpf, User user) {
-
+        borrowedBooks.forEach((code, title) -> {
+            System.out.println("Código: " + code + " | Título: " + title);
+        });
     }
 }
