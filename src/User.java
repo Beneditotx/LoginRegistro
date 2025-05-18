@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.time.LocalDate;
 
 public class User {
     private String username;
@@ -12,7 +13,7 @@ public class User {
     private String address;
     private String cpf;
     private int age;
-    private Map<String, String> borrowedBooks;
+    private Map<String, BookLoanInfo> borrowedBooks;
 
     public User(String username, String password, String firstName, String lastName,
                 String email, String birthDate, String phone, String address,
@@ -30,7 +31,30 @@ public class User {
         this.borrowedBooks = new HashMap<>();
     }
 
-    // Getters
+    public static class BookLoanInfo {
+        private String title;
+        private LocalDate checkoutDate;
+        private LocalDate dueDate;
+
+        public BookLoanInfo(String title, LocalDate checkoutDate, LocalDate dueDate) {
+            this.title = title;
+            this.checkoutDate = checkoutDate;
+            this.dueDate = dueDate;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public LocalDate getCheckoutDate() {
+            return checkoutDate;
+        }
+
+        public LocalDate getDueDate() {
+            return dueDate;
+        }
+    }
+
     public String getUsername() { return username; }
     public String getPassword() { return password; }
     public String getFirstName() { return firstName; }
@@ -42,24 +66,21 @@ public class User {
     public String getCpf() { return cpf; }
     public int getAge() { return age; }
 
-    // Método adicionado para resolver o problema
     public String getNomeCompleto() {
         return firstName + " " + lastName;
     }
 
-    // Setters
     public void setPassword(String password) { this.password = password; }
 
-    // Book management methods
-    public void borrowBook(String code, String title) {
-        borrowedBooks.put(code, title);
+    public void borrowBook(String code, String title, LocalDate checkoutDate, LocalDate dueDate) {
+        borrowedBooks.put(code, new BookLoanInfo(title, checkoutDate, dueDate));
     }
 
     public boolean returnBook(String code) {
         return borrowedBooks.remove(code) != null;
     }
 
-    public Map<String, String> getBorrowedBooks() {
+    public Map<String, BookLoanInfo> getBorrowedBooks() {
         return borrowedBooks;
     }
 
@@ -69,8 +90,11 @@ public class User {
             return;
         }
 
-        borrowedBooks.forEach((code, title) -> {
-            System.out.println("Código: " + code + " | Título: " + title);
+        borrowedBooks.forEach((code, loanInfo) -> {
+            System.out.println("Código: " + code +
+                    " | Título: " + loanInfo.getTitle() +
+                    " | Retirada: " + loanInfo.getCheckoutDate() +
+                    " | Devolução: " + loanInfo.getDueDate());
         });
     }
 }

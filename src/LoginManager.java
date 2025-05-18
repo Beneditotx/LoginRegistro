@@ -68,7 +68,7 @@ public class LoginManager {
                     booksManager.borrowBooks(user);
                     break;
                 case "3":
-                    booksManager.returnBooks(user);
+                    booksManager.borrowBooks(user);
                     break;
                 case "4":
                     System.out.println("\nSaindo da conta...");
